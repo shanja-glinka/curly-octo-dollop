@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="icon" href="/assets/frontend/img/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="/assets/frontend/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/frontend/css/style.css">
+
+    <title>Index</title>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Покупка</h1>
+        <form method="POST" class="form" action="/order">
+            <div class="form-group">
+                <label for="userFullName">ФИО</label>
+                <input type="text" name="userFullName" id="userFullName" required="required">
+            </div>
+            <div class="form-group">
+                <label for="productId">Продукт</label>
+                <select name="productId" id="productId" required="required">
+                    <?php
+                    foreach($products as $productId => $productData) {
+                        print('<option value="' . $productId . '">' . $productData['name'] . '['. $productData['sum'] .']</option>');
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="count">Количество</label>
+                <input type="number" step="1" name="count" id="count" required="required">
+            </div>
+            <div class="form-action">
+                <button type="submit">Купить</button>
+            </div>
+        </form>
+
+    </main>
+
+
+    <script src="/assets/frontend/js/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="icon" href="/assets/frontend/img/favicon/favicon.ico">
+
+    <link rel="stylesheet" href="/assets/frontend/fonts/fonts.css">
+    <link rel="stylesheet" href="/assets/frontend/css/style.css">
+
+    <title>Order</title>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <h1>Заказ #
+            <?=$order[0]['orderID'] ?>
+        </h1>
+        <form method="POST" class="form"
+            action="<? print(($order['payment'] === null ? '/order/payment/' . $order[0]['orderID'] : '/'));  ?>">
+            <div class="form-group">
+                <label for="userFullName">ФИО</label>
+                <input type="text" name="userFullName" id="userFullName" disabled
+                    value="<? print $order[0]['clientFillName'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="productId">Продукт</label>
+                <input type="text" name="productId" id="productId" disabled
+                    value="<? print $order[0]['productName'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="count">Количество</label>
+                <input type="text" name="count" id="count" disabled value="<? print $order[0]['productCount'] ?>">
+            </div>
+            <div class="form-group">
+                <label for="sum">Итог</label>
+                <input type="text" name="sum" id="sum" disabled value="<? print $order['totalSum'] ?>">
+            </div>
+
+            <? if ($payment == null) { ?>
+
+            <div class="form-action">
+                <button type="submit">Оплатить</button>
+            </div>
+
+            <? } else { ?>
+
+            <h3>Платеж</h3>
+            <div class="form-group">
+                <label for="paySysID">Платежная система</label>
+                <input type="text" name="paySysID" id="paySysID" disabled value="<? print $payment['paySysID'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="payCreated">Дата создания</label>
+                <input type="text" name="payCreated" id="payCreated" disabled
+                    value="<? print $payment['payCreated'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="payUpdated">Дата обновления</label>
+                <input type="text" name="payUpdated" id="payUpdated" disabled
+                    value="<? print $payment['payUpdated'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="payState">Состояние</label>
+                <input type="text" name="payState" id="payState" disabled value="<? print $payment['payState'] ?>">
+            </div>
+
+            <? if ($paylink != null) { ?>
+            <div class="form-action">
+                <a href="<? print $paylink ?>" target="_blank">Оплатить</a>
+            </div>
+            <? } ?>
+
+            <? } ?>
+
+
+        </form>
+
+    </main>
+
+
+    <script src="/assets/frontend/js/app.js"></script>
+
+</body>
+
+</html>
